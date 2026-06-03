@@ -1,95 +1,194 @@
-export default function Home() {
+import Head from "next/head";
+import Image from "next/image";
+
+function ProductGrid({ title, items }) {
   return (
-    <div style={styles.container}>
-      <h1 style={styles.title}>EJECT, me contrata! 😁</h1>
+    <section className="gallery">
+      <h2>{title}</h2>
 
-      <p style={styles.subtitle}>
-        Olá! Me chamo Leonardo, e sou estudante do curso de Ciências e
-        Tecnologia na UFRN. Tenho interesse em computação e segurança da
-        informação e estou buscando uma oportunidade de aprender na prática e
-        contribuir com projetos reais.
-      </p>
+      <div className="grid">
+        {items.map((p, i) => (
+          <div key={i} className="card">
+            <img src={p.img} alt={p.name} />
 
-      <div style={styles.buttons}>
-        <a
-          href="https://github.com/hashrdss"
-          target="_blank"
-          style={styles.button}
-        >
-          Meu GitHub
-        </a>
+            <h3>{p.name}</h3>
 
-        <a
-          href="https://www.linkedin.com/in/lssec/"
-          target="_blank"
-          style={styles.buttonSecondary}
-        >
-          LinkedIn
-        </a>
+            <p>{p.desc}</p>
+          </div>
+        ))}
       </div>
-
-      <p style={styles.footer}>
-        Página feita especialmente para o processo seletivo da EJECT 🚀
-      </p>
-    </div>
+    </section>
   );
 }
 
-const styles = {
-  container: {
-    height: "100vh",
-    background: "linear-gradient(135deg, #0f172a, #1e293b)",
-    color: "white",
-    display: "flex",
-    flexDirection: "column",
-    justifyContent: "center",
-    alignItems: "center",
-    textAlign: "center",
-    padding: "20px",
-    fontFamily: "Arial, sans-serif",
+const decor = [
+  {
+    name: "Caixa do amor",
+    desc: "Impressão temática do dia dos namorados. Perfeita para presentes elaborados e ocasiões especiais.",
+    img: "/products/heart.png",
   },
+  {
+    name: "Tulipa 3d",
+    desc: "Decoração elegante para qualquer ambiente. Pode ser impressa em qualquer cor, além de outros modelos de rosas disponíveis.",
+    img: "/products/rosa.png",
+  },
+  {
+    name: "Miniatura de coração",
+    desc: "As pernas articuladas permitem que se adeque ao ambiente. Outras decorações e brinquedos articulados são ideais para a diversão das crianças!",
+    img: "/products/legheart.png",
+  },
+  {
+    name: "Presépio iluminado",
+    desc: "Uma cena 3D detalhada representando a Sagrada Família sob a proteção de grandes asas de anjo. Perfeita como luminária de Natal ou decoração de presépio.",
+    img: "/products/presepio.png",
+  },
+];
 
-  title: {
-    fontSize: "3rem",
-    marginBottom: "20px",
+const diversos = [
+  {
+    name: "Suporte para livros",
+    desc: "Um simples suporte para 3 livros grandes, ou mais.",
+    img: "/products/books.png",
   },
+  {
+    name: "Coletor de pó de furadeira",
+    desc: "Deve ser anexada a parede furada para coletar rapidamente os resíduos",
+    img: "/products/poeira.png",
+  },
+  {
+    name: "Escorredor de Pratos Compacto",
+    desc: "Escorredor de pratos robusto para guardar pratos de cerâmica ou de jantar na vertical. Ideal após a lavagem para secar ou para uma organização que economiza espaço na bancada da cozinha. Design simples, funcional e adequado para o uso diário.",
+    img: "/products/pratos.png",
+  },
+  {
+    name: "Caixa pequena com ímãs",
+    desc: "Caixa de armazenamento com tampa magnética.",
+    img: "/products/caixaima.png",
+  },
+];
 
-  subtitle: {
-    maxWidth: "600px",
-    fontSize: "1.2rem",
-    marginBottom: "30px",
-    lineHeight: "1.6",
-    color: "#cbd5f5",
+const nerd = [
+  {
+    name: "Vaporeon",
+    desc: "Miniatura Pokemon impressa em PLA. Temos arquivos low poly de todos os pokemons da primeira geração disponíveis!",
+    img: "/products/vaporeon.png",
   },
+  {
+    name: "Ocarina of Time",
+    desc: "Prop para cosplay ou decoração inspirada em Zelda",
+    img: "/products/ocarina.png",
+  },
+  {
+    name: "Pokebola",
+    desc: "Feita com a mesma proporção retratada na obra",
+    img: "/products/pokeball.png",
+  },
+  {
+    name: "Hollow Knight e Hornet",
+    desc: "Miniaturas dos protagonistas dos jogos Hollow Knight e Silksong",
+    img: "/products/hkh.png",
+  },
+];
 
-  buttons: {
-    display: "flex",
-    gap: "15px",
-    marginBottom: "30px",
+const props = [
+  {
+    name: "Máscara do Receptáculo Puro",
+    desc: "Prop de cosplay do jogo Hollow Knight",
+    img: "/products/pure_vessel.png",
   },
+  {
+    name: "Máscara do espírito azul do Príncipe Zuko",
+    desc: "Impressa e pintada exatamente como a retratada na obra Avatar: A Lenda de Aang",
+    img: "/products/bluespirit.png",
+  },
+  {
+    name: "Máscara da Reze",
+    desc: "Prop de cosplay do mangá de Chainsaw Man",
+    img: "/products/reze.png",
+  },
+  {
+    name: "Lamparina do Link",
+    desc: "Réplica fiel do item do jogo The Legend of Zelda: Twilight Princess",
+    img: "/products/lamp.png",
+  },
+];
 
-  button: {
-    padding: "12px 24px",
-    background: "#38bdf8",
-    color: "#0f172a",
-    textDecoration: "none",
-    borderRadius: "8px",
-    fontWeight: "bold",
-  },
+export default function Home() {
+  return (
+    <>
+      <Head>
+        <title>Impressões 3D Personalizadas</title>
+        <meta
+          name="description"
+          content="Peças decorativas, props para cosplay e diversos, impressos em 3D sob encomenda."
+        />
+      </Head>
 
-  buttonSecondary: {
-    padding: "12px 24px",
-    background: "transparent",
-    border: "2px solid #38bdf8",
-    color: "#38bdf8",
-    textDecoration: "none",
-    borderRadius: "8px",
-    fontWeight: "bold",
-  },
+      <main>
+        <section className="hero">
+          <div className="logo">
+            <Image src="/logo.png" alt="Warp3D logo" width={220} height={220} />
+          </div>
 
-  footer: {
-    marginTop: "20px",
-    fontSize: "0.9rem",
-    opacity: 0.7,
-  },
-};
+          {/* HERO */}
+          <h1>Moldando as impressões 3D para toda a imaginação</h1>
+          <p>
+            Personagens, props de cosplay e peças decorativas feitas sob
+            encomenda.
+          </p>
+
+          <div className="buttons">
+            <a href="https://wa.me/558496903777" target="_blank">
+              Falar no WhatsApp
+            </a>
+
+            <a href="https://www.instagram.com/warp3d.print/" target="_blank">
+              Ver Instagram
+            </a>
+          </div>
+        </section>
+
+        <main>
+          <ProductGrid title="Peças decorativas" items={decor} />
+          <ProductGrid title="Diversos" items={diversos} />
+          <ProductGrid title="Cultura Nerd" items={nerd} />
+          <ProductGrid title="Props para cosplay" items={props} />
+        </main>
+
+        <section className="process">
+          <h2>Como funciona:</h2>
+
+          <div className="steps">
+            <div>
+              <h3>1</h3>
+              <p>Você envia sua ideia ou modelo</p>
+            </div>
+            <div>
+              <h3>2</h3>
+              <p>➡️ Eu preparo o modelo e realizo a impressão</p>
+            </div>
+
+            <div>
+              <h3>3</h3>
+              <p>➡️ Peça pronta para coleção, cosplay ou decoração</p>
+            </div>
+          </div>
+        </section>
+        {/* CTA */}
+        <section className="cta">
+          <h2>Quer criar algo único?</h2>
+
+          <p>Entre em contato e transforme sua ideia em uma peça real.</p>
+
+          <a
+            className="whatsapp"
+            href="https://wa.me/558496903777"
+            target="_blank"
+          >
+            Pedir orçamento
+          </a>
+        </section>
+      </main>
+    </>
+  );
+}
